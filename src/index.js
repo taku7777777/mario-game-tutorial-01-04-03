@@ -68,23 +68,23 @@ function update() {
 
     // 落下速度はだんだん大きくなる
     vy = vy + 0.5;
-  }
 
-  // 主人公の画像下部が地面の上部より下となったタイミングでブロックの上にいるか否かの判定をする
-  if (y + 32 < 332 && updatedY + 32 >= 332) {
-    // 全てのブロックに対して繰り返し処理をする
-    for (const block of blocks) {
-      if (
-        (x + 32 < block.x || x >= block.x + block.w) &&
-        (updatedX + 32 < block.x || updatedX >= block.x + block.w)
-      ) {
-        // ブロックの上にいない場合には何もしない
-        continue;
+    // 主人公の画像下部が地面の上部より下となったタイミングでブロックの上にいるか否かの判定をする
+    if (y + 32 < 332 && updatedY + 32 >= 332) {
+      // 全てのブロックに対して繰り返し処理をする
+      for (const block of blocks) {
+        if (
+          (x + 32 < block.x || x >= block.x + block.w) &&
+          (updatedX + 32 < block.x || updatedX >= block.x + block.w)
+        ) {
+          // ブロックの上にいない場合には何もしない
+          continue;
+        }
+        // ブロックの上にいる場合にはジャンプ解除し、y座標をブロックの上にいるように見える位置にする
+        updatedY = 300 + 32 - 32;
+        isJump = false;
+        break;
       }
-      // ブロックの上にいる場合にはジャンプ解除し、y座標をブロックの上にいるように見える位置にする
-      updatedY = 300 + 32 - 32;
-      isJump = false;
-      break;
     }
   }
 
